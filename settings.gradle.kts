@@ -4,7 +4,7 @@ pluginManagement {
             content {
                 includeGroupByRegex("com\\.android.*")
                 includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
+                includeGroupByRegex("androidx.*") 
             }
         }
         mavenCentral()
@@ -21,4 +21,3 @@ dependencyResolutionManagement {
 
 rootProject.name = "View 360"
 include(":app")
- 

@@ -2,13 +2,13 @@ package com.example.view360.utilityClasses
 
 import android.content.Context
 import android.content.pm.PackageManager
-import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.core.content.ContextCompat
 
-object Permission {
+class PermissionMngr(private val context: Context,
+                     private val permissionLauncher: ActivityResultLauncher<String>) {
 
-    fun granted(context: Context,permission: String): Boolean{
+    fun hasGranted(permission: String): Boolean{
         return ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
     }
 
@@ -16,15 +16,12 @@ object Permission {
         launcher.launch(permission)
     }
 
-    fun checkAndRequest(context: Context,launcher: ActivityResultLauncher<String>,permission: String){
-        if(!granted(context,permission)){
-            Log.d("permission","$permission not granted")
-            request(launcher,permission)
+    fun checkAndRequest(permission: String): Boolean{
+        if(!hasGranted(permission)){
+            request(permissionLauncher,permission)
+            return false
         }
-        else{
-            Log.d("permission","$permission has granted")
-        }
-
+        return true
     }
 
 
